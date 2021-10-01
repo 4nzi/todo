@@ -44,6 +44,7 @@ module.exports = {
     // 開発モード設定
     devtool: "source-map",
     devServer: {
-        contentBase: "./dist"
+        contentBase: "./dist",
+        historyApiFallback: true,
     }
 };

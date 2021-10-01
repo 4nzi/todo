@@ -1,6 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import { Route, BrowserRouter } from 'react-router-dom'
 import './style.css'
+import { Layout, App, Login } from './templats/index'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <Layout>
+    <BrowserRouter>
+      <>
+        <Route exact path="/" component={App} />
+        <Route exact path="/login" component={Login} />
+      </>
+    </BrowserRouter>
+  </Layout>,
+  document.getElementById('root')
+)
