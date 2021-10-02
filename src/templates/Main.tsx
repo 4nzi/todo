@@ -7,13 +7,6 @@ const App: React.VFC = (props: any) => {
   const [text, setText] = useState('')
 
   useEffect(() => {
-    const unSub = auth.onAuthStateChanged((user) => {
-      !user && props.history.push('login')
-    })
-    return () => unSub()
-  })
-
-  useEffect(() => {
     const unSub = db.collection('tasks').onSnapshot((snapshot) => {
       setTasks(
         snapshot.docs.map((doc) => ({ id: doc.id, title: doc.data().title }))
@@ -48,11 +41,14 @@ const App: React.VFC = (props: any) => {
           </li>
         ))}
       </ul>
+      <br />
+      <br />
+      <br />
+      <br />
       <button
         onClick={async () => {
           try {
             await auth.signOut()
-            props.history.push('login')
           } catch (error) {
             alert(error.message)
           }
