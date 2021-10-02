@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { auth } from '../firebase'
 import { Button, Input } from '../components/index'
 
-const Login: React.VFC = (props: any) => {
+const Login: React.VFC = () => {
   const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  useEffect(() => {
-    const unSub = auth.onAuthStateChanged((user) => {
-      user && props.history.push('/')
-    })
-    return () => unSub()
-  }, [props.history])
 
   return (
     <>
@@ -54,7 +47,6 @@ const Login: React.VFC = (props: any) => {
                   ? async () => {
                       try {
                         await auth.signInWithEmailAndPassword(email, password)
-                        props.history.push('/')
                       } catch (error: any) {
                         alert(error.message)
                       }
@@ -65,7 +57,6 @@ const Login: React.VFC = (props: any) => {
                           email,
                           password
                         )
-                        props.history.push('/')
                       } catch (error: any) {
                         alert(error.message)
                       }
