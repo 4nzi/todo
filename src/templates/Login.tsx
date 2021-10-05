@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { auth } from '../firebase'
 import { Button, Input } from '../components/index'
+import { signUp, signIn } from '../hooks/auth'
 
 const Login: React.VFC = () => {
   const [isLogin, setIsLogin] = useState(true)
@@ -44,23 +44,8 @@ const Login: React.VFC = () => {
               type="button"
               onClick={
                 isLogin
-                  ? async () => {
-                      try {
-                        await auth.signInWithEmailAndPassword(email, password)
-                      } catch (error: any) {
-                        alert(error.message)
-                      }
-                    }
-                  : async () => {
-                      try {
-                        await auth.createUserWithEmailAndPassword(
-                          email,
-                          password
-                        )
-                      } catch (error: any) {
-                        alert(error.message)
-                      }
-                    }
+                  ? () => signIn(email, password)
+                  : () => signUp(email, password)
               }
             >
               {isLogin ? 'Login' : 'Register'}

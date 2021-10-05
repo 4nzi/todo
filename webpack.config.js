@@ -1,15 +1,10 @@
-// pathモジュールの読み込み
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-    // 入力ファイル設定
     entry: [path.resolve(__dirname, "./src/index.tsx")],
-    // 出力ファイル設定
     output: {
-        // 出力されるファイル名
         filename: "bundle.js",
-        // 出力先ディレクトリ
         path: path.resolve(__dirname, "dist")
     },
 
@@ -42,7 +37,6 @@ module.exports = {
     },
 
     // 開発モード設定
-    devtool: "source-map",
     devServer: {
         contentBase: "./dist",
         historyApiFallback: true,
