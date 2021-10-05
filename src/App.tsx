@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { auth } from './firebase'
+import React from 'react'
+import { useAuthSub } from './hooks/useAuthSub'
 import { Main, Login, Layout } from './templates/index'
 
 const App: React.FC = () => {
-  const [isLogin, setIsLogin] = useState(false)
+  const { isLogin, isLoading } = useAuthSub()
 
-  useEffect(() => {
-    const unSub = auth.onAuthStateChanged((user) => {
-      user && setIsLogin(true)
-    })
-    return () => unSub()
-  })
-
+  if (isLoading === true) return <Layout></Layout>
   return <Layout>{isLogin ? <Main /> : <Login />}</Layout>
 }
 
